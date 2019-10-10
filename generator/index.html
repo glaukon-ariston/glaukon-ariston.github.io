@@ -136,6 +136,15 @@ http://opensource.org/licenses/MIT
     <div class="scripts-list"></div>
   </div>
 
+  <div id="project">
+    <h1 class="project-name">-</h1>
+    <div>Project ID: <span class="projectId">0</span></div>
+    <div>Author: <span class="author">-</span></div>
+    <div>Scratch-Version: <span class="scratch-version">-</span></div>
+    <div>Script Count: <span class="scriptCount">-</span></div>
+    <div>Sprite Count: <span class="spriteCount">-</span></div>
+    <div>Comment: <span class="comment">-</span></div>
+  </div>
   <div id="all-sprites">
   </div>
 </div>
@@ -240,7 +249,7 @@ function load_project (project) {
   }
 
   document.querySelector("#intro").classList.add("hidden");
-  show_all_sprites();
+  show_all_sprites(project);
   check_hash();
 }
 
@@ -317,7 +326,16 @@ function show_sprite(i) {
 }
 
 
-function show_all_sprites() {
+function show_all_sprites(project) {
+  let projectInfo = document.querySelector("project");
+  projectInfo.querySelector("project-name").textContent = project['info']['projectId'];
+  projectInfo.querySelector("projectId").textContent = project['info']['projectId'];
+  projectInfo.querySelector("author").textContent = project['info']['author'];
+  projectInfo.querySelector("scratch-version").textContent = project['info']['scratch-version'];
+  projectInfo.querySelector("scriptCount").textContent = project['info']['scriptCount'];
+  projectInfo.querySelector("spriteCount").textContent = project['info']['spriteCount'];
+  projectInfo.querySelector("comment").textContent = project['info']['comment'];
+
   for (const [key, value] of Object.entries(sprites)) {
     show_sprite(key);
   }
