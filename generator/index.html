@@ -328,9 +328,9 @@ function show_sprite(i) {
 
 
 function show_all_sprites() {
-  sprites.forEach(function(sprite, i) {
-    show_sprite(i);
-  })
+  for (const [key, value] of Object.entries(sprites)) {
+    show_sprite(key);
+  }
 }
 
 
