@@ -365,8 +365,16 @@ function show_sound(sound) {
 
 
 // JSON.stringify(project.variables[0]) = {"name":"Missile 1 Aloft","value":"0","isPersistent":false}
-function show_sound(sound) {
-      <tr> <th>name</th> <th>value</th> <th>isPersistent</th> </tr>
+function show_variable(variable) {
+  let variables = document.querySelector("#variables tbody");
+  let tr = document.createElement("tr")
+  variables.appendChild(tr);
+  let keys = ['name','value','isPersistent']
+  keys.forEach((key, i) => {
+    let td = document.createElement("td")
+    td.textContent = variable[key]
+    tr.appendChild(td);
+  });
 }
 
 
