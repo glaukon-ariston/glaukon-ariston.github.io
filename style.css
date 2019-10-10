@@ -335,23 +335,30 @@ button:active, button.pressed, .button:active, .button.pressed {
   margin: 1.5em 0;
 }
 .script-wrap input {
+  /*
   position: absolute;
   top: 0;
   left: 0;
+  */
 }
 
 /* Row */
 
 #header, #wrap, #sprites-list-wrap, #intro {
   position: absolute;
-  overflow: hidden;
+  /* overflow: hidden; */
+  overflow: auto;
+  /*
   left: 0;
   right: 0;
+  */
   padding: 1em;
 }
 
 #header {
+  /*
   top: 0;
+  */
 }
 
 
@@ -359,11 +366,14 @@ button:active, button.pressed, .button:active, .button.pressed {
 
 #left-pane, #sprite-detail, #intro {
   position: absolute;
-  overflow: hidden;
+  /* overflow: hidden; */
+  overflow: auto;
   overflow-y: auto;
+  /*
   top: 0;
   right: 0;
   bottom: 0;
+  */
   padding: 2em;
 }
 
@@ -416,21 +426,27 @@ button:active, button.pressed, .button:active, .button.pressed {
 
 
 #wrap {
+  /*
   top: 11em;
   bottom: 0;
+  */
 }
 
 
 /* Left pane */
 
 #left-pane {
+  /* 
   width: 14rem;
   left: 0;
+  */
 }
 #sprites-list-wrap {
   overflow-y: auto;
+  /* 
   top: 9.5em;
   bottom: 2em;
+  */
   margin: 0 2em;
   padding: 0;
   border: 1px solid #888;
@@ -457,7 +473,7 @@ button:active, button.pressed, .button:active, .button.pressed {
 }
 #num-chosen-scripts {
   font-size: 2em;
-  float: left;
+  /* float: left; */
   margin-right: 0.25em;
   min-width: 1.125em;
   text-align: right;
@@ -470,21 +486,24 @@ button:active, button.pressed, .button:active, .button.pressed {
 /* Right pane */
 
 #sprite-detail {
+  /* 
   left: 12rem;
   right: 0;
+  */
 }
 #sprite-info {
-  overflow: hidden; /* clearfix */
+  /* overflow: hidden; /* clearfix */ */
+  overflow: auto;
 }
 
 
 #sprite-name {
-  float: left;
+  /* float: left; */
   font-size: 1.5em;
   margin: 0 1.2222222em;
 }
 #costume-preview {
-  float: left;
+  /* float: left; */
   width: 6em;
   height: 6em;
   border: 1px solid #888;
