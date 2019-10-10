@@ -375,7 +375,8 @@ function chosen_scripts_updated () {
   document.querySelector("#num-chosen-scripts").textContent = chosen_scripts.length;
   if (chosen_scripts.length) {
     var code = export_code();
-    var url = "http://scratchblocks.github.io/#";
+    //var url = "http://scratchblocks.github.io/#";
+    var url = "/#";
     if (lang && lang !== "en") url += "?lang=" + lang + "&script=";
     url += encodeURIComponent(code);
     document.querySelector("#export").href = url
