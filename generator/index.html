@@ -136,11 +136,14 @@ http://opensource.org/licenses/MIT
   </div>
 
   <div id="sprite-detail">
-    <div id="sprite-info">
-      <div id="costume-preview"><img></div>
-      <h2 id="sprite-name"></h2>
+    <div class="sprite-info">
+      <div class="costume-preview"><img></div>
+      <h2 class="sprite-name"></h2>
     </div>
-    <div id="scripts-list"></div>
+    <div class="scripts-list"></div>
+  </div>
+
+  <div id="all-sprites">
   </div>
 </div>
 
@@ -212,10 +215,7 @@ function fetchProject(id) {
 }
 
 function clear_project () {
-  document.querySelector("#sprites-list").innerHTML = ""
-  document.querySelector("#sprite-name").innerHTML = ""
-  document.querySelector("#costume-preview img").src = ""
-  document.querySelector("#scripts-list").innerHTML = ""
+  document.querySelector("#all-sprites").innerHTML = ""
   document.querySelector("#export").disabled = true
   document.querySelector("#export").href = ""
 }
@@ -240,19 +240,9 @@ function load_project (project) {
 
   sprites_list.forEach(function(sprite, i) {
     sprites[i] = sprite;
-
-    var el = document.createElement("li")
-    el.textContent = sprite.objName
-    el.id = "sprite-" + i
-    el.addEventListener("click", function() {
-      show_sprite(i)
-    })
-    document.querySelector("#sprites-list").appendChild(el)
   })
 
-
   selected_sprite = 0;
-
   var hash = decodeURIComponent((location.href.split("#")[1] || ""));
   var result = /sprite=([0-9]+)/.exec(hash);
   if (result) {
@@ -260,17 +250,11 @@ function load_project (project) {
   }
 
   document.querySelector("#intro").classList.add("hidden");
-
-  show_sprite(selected_sprite);
-
+  show_all_sprites();
   check_hash();
 }
 
-function show_sprite (i) {
-  if (!sprites || !i in sprites) {
-    return;
-  }
-
+function show_sprite(i) {
   var sprite = sprites[i];
   if (!sprite) {
     return;
@@ -278,29 +262,26 @@ function show_sprite (i) {
 
   var name = sprite.objName;
 
-  selected_sprite = i;
-  location.hash = "#project="+current_id; //+"&sprite="+i
-
-  // select list item
-  var selected = document.querySelector("#sprites-list .selected")
-  if (selected) selected.classList.remove("selected");
-  document.querySelector("#sprite-"+i).classList.add("selected"); // TODO
+  let sprite_detail_id = 'sprite-detail-'+i;
+  let details = document.querySelector('#sprite-detail').cloneNode(true);
+  // Change the id attribute of the newly created element:
+  details.setAttribute('id', sprite_detail_id);
+  document.querySelector('#all-sprites').appendChild(details);
 
   // title
-  document.querySelector("#sprite-name").textContent = name;
-
+  details.querySelector(".sprite-name").textContent = name;
   // preview image
   var costume = sprite.costumes[sprite.currentCostumeIndex];
   if (costume && costume.baseLayerMD5) {
-    document.querySelector("#costume-preview img").src = asset_url(costume.baseLayerMD5);
+    details.querySelector(".costume-preview img").src = asset_url(costume.baseLayerMD5);
   }
 
   // scripts
-  document.querySelector("#scripts-list").innerHTML = ""
+  details.querySelector(".scripts-list").innerHTML = "";
   if (!sprite.scripts) {
     var emptyState = document.createElement("p")
     emptyState.textContent = "No scripts."
-    document.querySelector("#scripts-list").appendChild(emptyState)
+    details.querySelector(".scripts-list").appendChild(emptyState)
   } else {
     var highest_script_id = 1;
 
@@ -317,7 +298,7 @@ function show_sprite (i) {
 
       var wrapEl = document.createElement("div")
       wrapEl.className = "script-wrap"
-      document.querySelector("#scripts-list").appendChild(wrapEl);
+      details.querySelector(".scripts-list").appendChild(wrapEl);
 
       var scriptDoc = new scratchblocks.Document([script]);
       var docView = scratchblocks.newView(scriptDoc, {
@@ -335,34 +316,8 @@ function show_sprite (i) {
       wrapEl.appendChild(label)
 
       var id = highest_script_id;
-      var checkbox = document.createElement("input")
-      checkbox.type = "checkbox"
-      checkbox.id = "script-"+ id
-      checkbox.addEventListener("change", function (e) {
-        var script_id = selected_sprite + "-" + id
-        if (this.checked) {
-          chosen_scripts.push(script_id);
-        } else {
-          var index = chosen_scripts.indexOf(script_id);
-          if (index > -1) {
-            chosen_scripts.splice(index, 1);
-          }
-        }
-        chosen_scripts_updated();
-      });
-      wrapEl.appendChild(checkbox)
-
-      svg.addEventListener("click", function(e) {
-        checkbox.click()
-      })
-
       var key = selected_sprite + "-" + highest_script_id;
       scripts_by_id[key] = code;
-
-      if (chosen_scripts.indexOf(key) > -1) {
-        checkbox.prop('checked', true);
-      }
-
       highest_script_id += 1;
     });
   }
@@ -370,6 +325,11 @@ function show_sprite (i) {
   // DEBUG
   window.sprite = sprite;
 }
+
+
+function show_all_sprites() {
+}
+
 
 function chosen_scripts_updated () {
   document.querySelector("#num-chosen-scripts").textContent = chosen_scripts.length;
