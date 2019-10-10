@@ -137,8 +137,8 @@ http://opensource.org/licenses/MIT
   </div>
 
   <div id="project">
-    <h1 class="project-name">-</h1>
-    <div>Project ID: <span class="projectId">0</span></div>
+    <h1>Project <span class="project-name">-</span></h1>
+    <div>Project ID: <span class="projectID">0</span></div>
     <div>Author: <span class="author">-</span></div>
     <div>Scratch-Version: <span class="scratch-version">-</span></div>
     <div>Script Count: <span class="scriptCount">-</span></div>
@@ -328,8 +328,8 @@ function show_sprite(i) {
 
 function show_all_sprites(project) {
   let projectInfo = document.querySelector("#project");
-  projectInfo.querySelector(".project-name").textContent = project['info']['projectId'];
-  projectInfo.querySelector(".projectId").textContent = project['info']['projectId'];
+  projectInfo.querySelector(".project-name").textContent = project['info']['projectID'];
+  projectInfo.querySelector(".projectID").textContent = project['info']['projectID'];
   projectInfo.querySelector(".author").textContent = project['info']['author'];
   projectInfo.querySelector(".scratch-version").textContent = project['info']['scratch-version'];
   projectInfo.querySelector(".scriptCount").textContent = project['info']['scriptCount'];
