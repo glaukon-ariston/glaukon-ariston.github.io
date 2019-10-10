@@ -327,14 +327,14 @@ function show_sprite(i) {
 
 
 function show_all_sprites(project) {
-  let projectInfo = document.querySelector("project");
-  projectInfo.querySelector("project-name").textContent = project['info']['projectId'];
-  projectInfo.querySelector("projectId").textContent = project['info']['projectId'];
-  projectInfo.querySelector("author").textContent = project['info']['author'];
-  projectInfo.querySelector("scratch-version").textContent = project['info']['scratch-version'];
-  projectInfo.querySelector("scriptCount").textContent = project['info']['scriptCount'];
-  projectInfo.querySelector("spriteCount").textContent = project['info']['spriteCount'];
-  projectInfo.querySelector("comment").textContent = project['info']['comment'];
+  let projectInfo = document.querySelector("#project");
+  projectInfo.querySelector(".project-name").textContent = project['info']['projectId'];
+  projectInfo.querySelector(".projectId").textContent = project['info']['projectId'];
+  projectInfo.querySelector(".author").textContent = project['info']['author'];
+  projectInfo.querySelector(".scratch-version").textContent = project['info']['scratch-version'];
+  projectInfo.querySelector(".scriptCount").textContent = project['info']['scriptCount'];
+  projectInfo.querySelector(".spriteCount").textContent = project['info']['spriteCount'];
+  projectInfo.querySelector(".comment").textContent = project['info']['comment'];
 
   for (const [key, value] of Object.entries(sprites)) {
     show_sprite(key);
