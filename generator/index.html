@@ -147,6 +147,30 @@ http://opensource.org/licenses/MIT
   </div>
   <div id="all-sprites">
   </div>
+
+  <!-- JSON.stringify(project.sounds[0]) = {"soundName":"pop","soundID":-1,"md5":"83a9787d4cb6f3b7632b4ddfebf74367.wav","sampleCount":258,"rate":11025,"format":""} -->
+  <div id="sounds">
+    <h1>Sounds<&h1>
+    <table>
+      <thead>
+      <tr> <th>soundID</th> <th>soundName</th> <th>sampleCount</th> <th>rate</th> <th>format</th> </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- JSON.stringify(project.variables[0]) = {"name":"Missile 1 Aloft","value":"0","isPersistent":false} -->
+  <div id="variables">
+    <h1>Variables<&h1>
+    <table>
+      <thead>
+      <tr> <th>name</th> <th>value</th> <th>isPersistent</th> </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 
@@ -326,6 +350,26 @@ function show_sprite(i) {
 }
 
 
+// JSON.stringify(project.sounds[0]) = {"soundName":"pop","soundID":-1,"md5":"83a9787d4cb6f3b7632b4ddfebf74367.wav","sampleCount":258,"rate":11025,"format":""}
+function show_sound(sound) {
+  let sounds = document.querySelector("#sounds tbody");
+  let tr = document.createElement("tr")
+  sounds.appendChild(tr);
+  let keys = ['soundID','soundName','sampleCount','rate','format']
+  keys.forEach((key, i) => {
+    let td = document.createElement("td")
+    td.textContent = sound[key]
+    tr.appendChild(td);
+  });
+}
+
+
+// JSON.stringify(project.variables[0]) = {"name":"Missile 1 Aloft","value":"0","isPersistent":false}
+function show_sound(sound) {
+      <tr> <th>name</th> <th>value</th> <th>isPersistent</th> </tr>
+}
+
+
 function show_all_sprites(project) {
   let projectInfo = document.querySelector("#project");
   projectInfo.querySelector(".project-name").textContent = project['info']['projectID'];
@@ -338,6 +382,14 @@ function show_all_sprites(project) {
 
   for (const [key, value] of Object.entries(sprites)) {
     show_sprite(key);
+  }
+
+  for (const [key, value] of Object.entries(project.sounds)) {
+    show_sound(value);
+  }
+
+  for (const [key, value] of Object.entries(project.variables)) {
+    show_variable(value);
   }
 }
 
