@@ -330,6 +330,10 @@ button:active, button.pressed, .button:active, .button.pressed {
 
 /* for generator */
 
+@media print {
+    div.script-wrap { break-inside: avoid; }
+}
+
 .script-wrap {
   position: relative;
   margin: 1.5em 0;
