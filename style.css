@@ -332,6 +332,7 @@ button:active, button.pressed, .button:active, .button.pressed {
 
 @media print {
     div.script-wrap { break-inside: avoid; }
+    div.script-wrap > label > svg > g > g > g { break-inside: avoid; }
 }
 
 .script-wrap {
